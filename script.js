@@ -52,6 +52,19 @@ function showDate(date) {
    navigator.geolocation.getCurrentPosition(showPosition);
    }
    
-   
    let buttonC = document.querySelector("#currentB");
    buttonC.addEventListener("click", getPos);
+   function showCelcium() {
+      let temp = document.querySelector("#temp"); 
+      temp.innerHTML = `...`;
+   }
+   let celcium = document.querySelector("#celcium");
+   celcium.addEventListener("click", showCelcium);
+   
+   
+   function showFarengeit() {
+      let temper = document.querySelector("#temp"); 
+      temper.innerHTML = Math.round(temp.textContent * 9 / 5 + 32);
+   }
+   let farengeit = document.querySelector("#farengeit");
+   farengeit.addEventListener("click", showFarengeit);
