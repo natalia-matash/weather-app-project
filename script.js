@@ -20,3 +20,22 @@ function showDate(date) {
    let dateElement = document.querySelector("#day");
    let currentTime = new Date();
    dateElement.innerHTML = showDate(currentTime);
+
+   function showTemp(response) {
+      document.querySelector("#temp").innerHTML = Math.round(response.data.main.temp);
+      document.querySelector("#description").innerHTML = response.data.weather[0].description;
+      document.querySelector("#humidity").innerHTML = response.data.main.humidity;
+      document.querySelector("#wind").innerHTML = Math.round(response.data.wind.speed);
+      document.querySelector("#city").innerHTML = response.data.name;
+   }
+   
+    function searchCity(event) {
+      event.preventDefault();
+   let apiKey = `0511a6e92a8692a228d7c70698a18f5d`;
+   let apiCity = document.querySelector("#input").value;
+   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${apiCity}&appid=${apiKey}&units=metric`;
+   axios.get(apiUrl).then(showTemp);
+   }
+   
+   let button = document.querySelector("#button");
+   button.addEventListener("click", searchCity);
