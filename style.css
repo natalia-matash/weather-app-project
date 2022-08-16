@@ -106,4 +106,12 @@ body {
    font-weight: 400;
    font-size: 20px;
  }
- 
+ .footer-link {
+  text-decoration: none;
+  color: #ffc2dc;
+  transition: all 200ms ease-in-out;
+ }
+ .footer-link:hover {
+  text-decoration: underline;
+  color: white;
+ }
