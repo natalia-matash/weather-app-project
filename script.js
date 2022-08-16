@@ -39,3 +39,19 @@ function showDate(date) {
    
    let button = document.querySelector("#button");
    button.addEventListener("click", searchCity);
+
+   function showPosition(position) {
+      let lat = position.coords.latitude;
+      let lon = position.coords.longitude;
+      let apiKey = "0511a6e92a8692a228d7c70698a18f5d";
+      let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;  
+      axios.get(apiUrl).then(showTemp);   
+   }
+   function getPos(event) {
+      event.preventDefault();
+   navigator.geolocation.getCurrentPosition(showPosition);
+   }
+   
+   
+   let buttonC = document.querySelector("#currentB");
+   buttonC.addEventListener("click", getPos);
