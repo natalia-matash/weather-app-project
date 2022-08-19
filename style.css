@@ -18,21 +18,36 @@ body {
 
 
  }
- .degrees {
-   font-size: 18px;
-   transition: all 200ms ease-in-out;
- }
- .degrees a {
-   font-size: 18px;
+ 
+.degrees {
    color: white;
+   font-size: 20px;
+   font-weight: 600;
+   position: relative;
+   line-height: 1;
    text-decoration: none;
-   cursor: pointer;
+}
+ .active {
+  color: white;
+  text-decoration: none;
  }
- .degrees :hover {
-   color: #ffc2dc;
-   transition: all 200ms ease-in-out;
+ .active:hover{
+  color: white;
+  text-decoration: none;
+  cursor: default;
+ }
+ .no-active {
+  color: #ff6585;
+  text-decoration: none;
+  opacity: .8;
+ }
+ .no-active:hover{
+  color: #ff6585;
+  text-decoration: underline;
+  cursor: pointer;
+  opacity: .8;
+ }
 
- }
 
 
  .form:after {
@@ -59,6 +74,11 @@ body {
  .image {
    width: 120px;
    padding-left: 30px;
+ }
+ .icons {
+  width: 40px;
+  height: 40px;
+
  }
  .col-tempetature {
    font-size: 40px;
@@ -115,6 +135,7 @@ body {
  .footer-link {
   text-decoration: none;
   color: #ffc2dc;
+  font-weight: 700;
   transition: all 200ms ease-in-out;
  }
  .footer-link:hover {

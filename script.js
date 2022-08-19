@@ -21,9 +21,46 @@ function showDate(date) {
    let currentTime = new Date();
    dateElement.innerHTML = showDate(currentTime);
 
+   function formatDay(timestamp) {
+   let date = new Date(timestamp * 1000);
+   let days = ["Sun","Mon", "Tue", "Wed", "Thu", "Fri", "Sat",];
+   let day = date.getDay();
+   return days[day];
+   }
+
+
+   function displayForecast(response) {
+      let forecastElement = document.querySelector("#section");
+      let forecast = response.data.daily;
+      let forecastHTML = `<div class="row justify-content-between">`;
+
+      forecast.forEach(function(forecastDay,index) {
+         if(index < 5) {
+            forecastHTML = forecastHTML + 
+            `<div class="col-2">
+            <div class="col-item">
+              <div class="smile">
+              <img class="icons" src="http://openweathermap.org/img/wn/${forecastDay.weather[0].icon}@2x.png" alt=""></div>
+              <div class="section-temperature">${Math.round(forecastDay.temp.max)}&deg;</div>
+              <div class="section-day">${formatDay(forecastDay.dt)}</div>
+            </div>
+          </div>`;
+         }
+      })
+      forecastHTML = forecastHTML + `</div>`;
+      forecastElement.innerHTML = forecastHTML;
+   }
+
+   function getForecast(coordinates) {
+   let apiKey = "0511a6e92a8692a228d7c70698a18f5d";
+   let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
+   axios.get(apiUrl).then(displayForecast);
+   }
 
    function showTemperature(response) {
-      document.querySelector("#temp").innerHTML = Math.round(response.data.main.temp);
+      let temperatureElement = document.querySelector("#temp");
+      celsiusTemperature = response.data.main.temp;
+      temperatureElement.innerHTML = Math.round(celsiusTemperature);
       document.querySelector("#description").innerHTML = response.data.weather[0].description;
       document.querySelector("#humidity").innerHTML = response.data.main.humidity;
       document.querySelector("#wind").innerHTML = Math.round(response.data.wind.speed);
@@ -31,6 +68,8 @@ function showDate(date) {
       let iconElement = document.querySelector("#icon");
       iconElement.setAttribute("src", `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`);
       iconElement.setAttribute("alt", response.data.weather[0].icon);
+
+      getForecast(response.data.coord);
    }
    
     function searchCity(city) {
@@ -55,26 +94,45 @@ function showDate(date) {
       let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;  
       axios.get(apiUrl).then(showTemperature);   
    }
-   function getPos(event) {
+   function getPosition(event) {
       event.preventDefault();
    navigator.geolocation.getCurrentPosition(showPosition);
    }
    
    let buttonC = document.querySelector("#currentB");
-   buttonC.addEventListener("click", getPos);
-   function showCelcium() {
-      let temp = document.querySelector("#temp"); 
-      temp.innerHTML = `...`;
+   buttonC.addEventListener("click", getPosition);
+
+   function showFahrenheitTemperature(event) {
+      event.preventDefault();
+      let temperatureElement = document.querySelector("#temp"); 
+      celciusLink.classList.remove("active");
+      fahrenheitLink.classList.add("active");
+      celciusLink.classList.add("no-active");
+      fahrenheitLink.classList.remove("no-active");
+      let fahrenheitTemperature = (celsiusTemperature * 9) / 5 + 32;
+      temperatureElement.innerHTML = Math.round(fahrenheitTemperature);
    }
-   let celcium = document.querySelector("#celcium");
-   celcium.addEventListener("click", showCelcium);
-   
-   
-   function showFarengeit() {
-      let temper = document.querySelector("#temp"); 
-      temper.innerHTML = Math.round(temp.textContent * 9 / 5 + 32);
+   function showCelciusTemperature(event) {
+      event.preventDefault();
+      let temperatureElement = document.querySelector("#temp"); 
+      celciusLink.classList.add("active");
+      fahrenheitLink.classList.remove("active");
+      celciusLink.classList.remove("no-active");
+      fahrenheitLink.classList.add("no-active");
+      temperatureElement.innerHTML = Math.round(celsiusTemperature); 
    }
-   let farengeit = document.querySelector("#farengeit");
-   farengeit.addEventListener("click", showFarengeit);
+   let celsiusTemperature = null;
+
+   let fahrenheitLink = document.querySelector("#fahrenheit-link");
+   fahrenheitLink.addEventListener("click",
+   showFahrenheitTemperature);
+
+   let celciusLink = document.querySelector("#celsius-link");
+   celciusLink.addEventListener("click", showCelciusTemperature);
+
+
+  
 
    searchCity("Kyiv");
+   displayForecast();
+ 
