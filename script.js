@@ -21,31 +21,39 @@ function showDate(date) {
    let currentTime = new Date();
    dateElement.innerHTML = showDate(currentTime);
 
-   function showTemp(response) {
+
+   function showTemperature(response) {
       document.querySelector("#temp").innerHTML = Math.round(response.data.main.temp);
       document.querySelector("#description").innerHTML = response.data.weather[0].description;
       document.querySelector("#humidity").innerHTML = response.data.main.humidity;
       document.querySelector("#wind").innerHTML = Math.round(response.data.wind.speed);
       document.querySelector("#city").innerHTML = response.data.name;
+      let iconElement = document.querySelector("#icon");
+      iconElement.setAttribute("src", `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`);
+      iconElement.setAttribute("alt", response.data.weather[0].icon);
    }
    
-    function searchCity(event) {
-      event.preventDefault();
+    function searchCity(city) {
    let apiKey = `0511a6e92a8692a228d7c70698a18f5d`;
-   let apiCity = document.querySelector("#input").value;
-   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${apiCity}&appid=${apiKey}&units=metric`;
-   axios.get(apiUrl).then(showTemp);
+   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+   axios.get(apiUrl).then(showTemperature);
+   }
+
+   function handleSubmit(event) {
+      event.preventDefault();
+      let inputElement = document.querySelector("#input");
+      searchCity(inputElement.value);
    }
    
    let button = document.querySelector("#button");
-   button.addEventListener("click", searchCity);
+   button.addEventListener("click", handleSubmit);
 
    function showPosition(position) {
       let lat = position.coords.latitude;
       let lon = position.coords.longitude;
       let apiKey = "0511a6e92a8692a228d7c70698a18f5d";
       let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;  
-      axios.get(apiUrl).then(showTemp);   
+      axios.get(apiUrl).then(showTemperature);   
    }
    function getPos(event) {
       event.preventDefault();
@@ -68,3 +76,5 @@ function showDate(date) {
    }
    let farengeit = document.querySelector("#farengeit");
    farengeit.addEventListener("click", showFarengeit);
+
+   searchCity("Kyiv");
