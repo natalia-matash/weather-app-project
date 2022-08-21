@@ -217,12 +217,12 @@ body {
   }
 
   #input {
-    width: 40%;
-    height: 30%;
+    width: 30%;
+    height: 10%;
   }
   button {
-    width: 40px;
-    height: 30px;
+    width: 35px;
+    height: 25px;
   }
   .btn {
     font-size: 5px;
@@ -236,10 +236,10 @@ body {
     height: 70%;
    }
    .col-tempetature {
-    font-size: 30px;
+    font-size: 20px;
    }
    .degrees {
-    font-size: 13px;
+    font-size: 8px;
    }
    .col-status {
     font-size: 10px;
@@ -262,10 +262,10 @@ body {
   padding: 5px 0;
 }
 .section-temperature {
-  font-size: 13px;
+  font-size: 10px;
 }
 .section-day {
-  font-size: 12px;
+  font-size: 9px;
 }
 .section-temperature:after {
   content: "";
