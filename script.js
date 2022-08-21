@@ -30,8 +30,9 @@ function showDate(date) {
 
 
    function displayForecast(response) {
+      
+      let forecast = response.data.daily.splice(1, 6);
       let forecastElement = document.querySelector("#section");
-      let forecast = response.data.daily;
       let forecastHTML = `<div class="row justify-content-between">`;
 
       forecast.forEach(function(forecastDay,index) {
@@ -41,7 +42,7 @@ function showDate(date) {
             <div class="col-item">
               <div class="smile">
               <img class="icons" src="http://openweathermap.org/img/wn/${forecastDay.weather[0].icon}@2x.png" alt=""></div>
-              <div class="section-temperature">${Math.round(forecastDay.temp.max)}&deg;</div>
+              <div class="section-temperature" id="section-temperature">${Math.round(forecastDay.temp.day)}º</div>
               <div class="section-day">${formatDay(forecastDay.dt)}</div>
             </div>
           </div>`;
@@ -49,6 +50,7 @@ function showDate(date) {
       })
       forecastHTML = forecastHTML + `</div>`;
       forecastElement.innerHTML = forecastHTML;
+      forecastTemp = forecast;
    }
 
    function getForecast(coordinates) {
@@ -111,7 +113,14 @@ function showDate(date) {
       fahrenheitLink.classList.remove("no-active");
       let fahrenheitTemperature = (celsiusTemperature * 9) / 5 + 32;
       temperatureElement.innerHTML = Math.round(fahrenheitTemperature);
-   }
+      let divTemp = document.getElementsByClassName("section-temperature");
+      for (i = 0; i < 5; i++) {
+         divTemp[i].innerHTML = `${Math.round(
+           (forecastTemp[i].temp.day * 9) / 5 + 32
+         )}º`;
+       }
+      }
+      
    function showCelciusTemperature(event) {
       event.preventDefault();
       let temperatureElement = document.querySelector("#temp"); 
@@ -120,8 +129,15 @@ function showDate(date) {
       celciusLink.classList.remove("no-active");
       fahrenheitLink.classList.add("no-active");
       temperatureElement.innerHTML = Math.round(celsiusTemperature); 
-   }
+      let divTemp = document.getElementsByClassName("section-temperature");
+      
+      for (i = 0; i < 5; i++) {
+         divTemp[i].innerHTML = `${Math.round(forecastTemp[i].temp.day)}º`;
+       }
+      }
+
    let celsiusTemperature = null;
+   let forecastTemp = [];
 
    let fahrenheitLink = document.querySelector("#fahrenheit-link");
    fahrenheitLink.addEventListener("click",
@@ -130,9 +146,6 @@ function showDate(date) {
    let celciusLink = document.querySelector("#celsius-link");
    celciusLink.addEventListener("click", showCelciusTemperature);
 
-
-  
-
    searchCity("Kyiv");
-   displayForecast();
+
  
