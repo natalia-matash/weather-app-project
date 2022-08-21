@@ -15,8 +15,6 @@ body {
  .img {
   width: 90%;
   height: 90%;
-
-
  }
  
 .degrees {
@@ -47,8 +45,6 @@ body {
   cursor: pointer;
   opacity: .8;
  }
-
-
 
  .form:after {
    content: "";
@@ -142,3 +138,143 @@ body {
   text-decoration: underline;
   color: white;
  }
+
+ @media (max-width: 768px) {
+  .main {
+    width: 80%;
+    margin-top: 30px;
+  }
+  #input {
+    width: 40%;
+    height: 50%;
+  }
+  button {
+    width: 65px;
+    height: 35px;
+  }
+  .btn {
+    font-size: 13px;
+  }
+  .city {
+    margin-top: 10px;
+   }
+   .col-4 {
+    padding: 0;
+    margin: 0;
+   }
+  .img {
+    width: 90%;
+    height: 70%;
+   }
+   .col-tempetature {
+    font-size: 35px;
+   }
+   .degrees,
+   .col-status {
+    font-size: 15px;
+   }
+   .col-day,
+   .col-time {
+   padding-right: 40px;
+   font-size: 20px;
+ }
+ .col-info {
+  font-size: 10px;
+  font-style: italic;
+  padding-right: 30px;
+}
+.section {
+  width: 70%;
+  margin: 0 auto 10px;
+}
+.col-2 {
+  padding: 8px 0;
+}
+.section-temperature {
+  font-size: 16px;
+}
+.section-day {
+  font-size: 13px;
+}
+.section-temperature:after {
+  content: "";
+   display: block;
+   margin: 5px auto;
+   width: 25px;
+   height: 2px;
+   background: white;
+ }
+ .container {
+  width: 80%;
+ }
+ .footer-link {
+  font-size: 15px;
+ }
+}
+@media (max-width: 576px) {
+
+  #input {
+    width: 40%;
+    height: 30%;
+  }
+  button {
+    width: 40px;
+    height: 30px;
+  }
+  .btn {
+    font-size: 5px;
+  }
+   .col-4 {
+    padding: 0;
+    margin: 0;
+   }
+  .img {
+    width: 70%;
+    height: 70%;
+   }
+   .col-tempetature {
+    font-size: 30px;
+   }
+   .degrees,
+   .col-status {
+    font-size: 13px;
+   }
+   .col-day,
+   .col-time {
+   padding-right: 40px;
+   font-size: 15px;
+ }
+ .col-info {
+  font-size: 8px;
+  font-style: italic;
+  padding-right: 30px;
+}
+.section {
+  width: 70%;
+  margin: 0 auto 10px;
+}
+.col-2 {
+  padding: 5px 0;
+}
+.section-temperature {
+  font-size: 13px;
+}
+.section-day {
+  font-size: 12px;
+}
+.section-temperature:after {
+  content: "";
+   display: block;
+   margin: 3px auto;
+   width: 25px;
+   height: 2px;
+   background: white;
+ }
+ .footer-link {
+  font-size: 13px;
+ }
+}
+
+   
+
+ 
