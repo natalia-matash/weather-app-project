@@ -139,7 +139,7 @@ body {
   color: white;
  }
 
- @media (max-width: 768px) {
+ @media screen and (max-width: 768px) {
   .main {
     width: 80%;
     margin-top: 30px;
@@ -211,7 +211,10 @@ body {
   font-size: 15px;
  }
 }
-@media (max-width: 576px) {
+@media screen and (max-width: 576px) {
+  .main {
+    width: 80%;
+  }
 
   #input {
     width: 40%;
@@ -235,9 +238,11 @@ body {
    .col-tempetature {
     font-size: 30px;
    }
-   .degrees,
-   .col-status {
+   .degrees {
     font-size: 13px;
+   }
+   .col-status {
+    font-size: 10px;
    }
    .col-day,
    .col-time {
@@ -270,9 +275,13 @@ body {
    height: 2px;
    background: white;
  }
- .footer-link {
-  font-size: 13px;
+ .container {
+  width: 80%;
  }
+ .footer-link {
+  font-size: 10px;
+ }
+
 }
 
    
